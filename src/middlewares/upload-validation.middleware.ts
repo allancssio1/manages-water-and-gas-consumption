@@ -7,7 +7,6 @@ export const uploadValidateMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log('meddle')
   const requestSchemaUpload = z.object({
     body: z.object({
       customer_code: z.string(),
@@ -34,7 +33,6 @@ export const uploadValidateMiddleware = (
   })
 
   requestSchemaUpload.parse(req)
-  console.log('meddle go')
 
   next()
 }

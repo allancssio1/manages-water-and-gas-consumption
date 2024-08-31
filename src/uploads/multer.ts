@@ -6,8 +6,6 @@ export const upload = async (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log('multer')
-
   const upload = multer({
     storage: multer.memoryStorage(),
     preservePath: true,
@@ -31,7 +29,6 @@ export const upload = async (
       return res.status(500).send(err)
     }
 
-    console.log('multer go')
     next()
   })
 }

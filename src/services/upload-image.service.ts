@@ -10,12 +10,6 @@ export class UploadImageService implements UploadImage {
 
     if (!file?.buffer) throw new Error()
 
-    const response = await fileManager.uploadFile('jetpack.jpg', {
-      mimeType: file?.mimetype,
-      name: `${Date.now()}-${file.originalname}`,
-    })
-    console.log('🚀 ~ UploadImageService ~ response ~ response:', response)
-
     return {
       success: true,
       status: 200,
