@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node --env-file .env src/server.js",
+    "start": "node --env-file .env dist/server.mjs",
+    "build": "tsup src --format esm",
     "dev": "tsx watch --env-file .env src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,6 +33,7 @@
     "@types/node": "22.5.1",
     "eslint": "8.57.0",
     "prisma": "5.19.0",
+    "tsup": "8.2.4",
     "tsx": "4.19.0",
     "typescript": "5.5.4"
   }

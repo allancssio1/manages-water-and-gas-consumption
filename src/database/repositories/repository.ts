@@ -1,5 +1,5 @@
 export interface Repository {
   create(data: unknown): Promise<unknown>
-  find(data: string): Promise<unknown>
+  find(customerCode: string): Promise<unknown>
   findAll(): Promise<unknown>
 }

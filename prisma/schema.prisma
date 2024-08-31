@@ -19,7 +19,7 @@ enum Type {
 }
 
 model File {
-  id              String   @id @default(uuid()) @map("_id")
+  id              String   @id @default(uuid()) @map("_id") @db.ObjectId
   customerCode    String   @map("customer_code")
   measureDatetime DateTime @map("measure_datetime")
   measureType     Type     @map("measure_typex")

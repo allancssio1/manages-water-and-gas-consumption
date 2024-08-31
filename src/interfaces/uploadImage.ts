@@ -16,3 +16,7 @@ export interface ResponseUploadImage extends Response {
 export interface UploadImage {
   handler(req: Request): Promise<ResponseUploadImage>
 }
+
+export interface ListMeasures {
+  handler(customerCode: string): Promise<unknown>
+}

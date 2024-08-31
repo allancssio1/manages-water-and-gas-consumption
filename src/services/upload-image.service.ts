@@ -1,11 +1,20 @@
 import { Request } from 'express'
-import { z } from 'zod'
-import sharp from 'sharp'
 import { ResponseUploadImage, UploadImage } from '../interfaces/uploadImage'
+import { Repository } from '../database/repositories/repository'
+import { fileManager } from '../providers/file-manager'
 
 export class UploadImageService implements UploadImage {
+  constructor(private readonly repository: Repository) {}
   async handler(req: Request): Promise<ResponseUploadImage> {
     const { body, file } = req
+
+    if (!file?.buffer) throw new Error()
+
+    const response = await fileManager.uploadFile('jetpack.jpg', {
+      mimeType: file?.mimetype,
+      name: `${Date.now()}-${file.originalname}`,
+    })
+    console.log('🚀 ~ UploadImageService ~ response ~ response:', response)
 
     return {
       success: true,
