@@ -1,11 +1,11 @@
 import { Request } from 'express'
-import { ResponseUploadImage, UploadImage } from '../interfaces/uploadImage'
+import { ResponseMeasure, UploadImage } from '../interfaces/uploadImage'
 import { Repository } from '../database/repositories/repository'
 import { fileManager } from '../providers/file-manager'
 
 export class UploadImageService implements UploadImage {
   constructor(private readonly repository: Repository) {}
-  async handler(req: Request): Promise<ResponseUploadImage> {
+  async handler(req: Request): Promise<ResponseMeasure> {
     const { body, file } = req
 
     if (!file?.buffer) throw new Error()

@@ -5,7 +5,7 @@ export interface Response {
   status: number
 }
 
-export interface ResponseUploadImage extends Response {
+export interface ResponseMeasure extends Response {
   data: {
     image_url: string
     measure_value: number
@@ -13,8 +13,16 @@ export interface ResponseUploadImage extends Response {
   }
 }
 
+export interface ConfirmMeasure {
+  confirmed_value: number
+  measure_uuid: string
+}
+
 export interface UploadImage {
-  handler(req: Request): Promise<ResponseUploadImage>
+  handler(req: Request): Promise<ResponseMeasure>
+}
+export interface ConfirmMeasureProps {
+  handler(props: ConfirmMeasure): Promise<ResponseMeasure>
 }
 
 export interface ListMeasures {
