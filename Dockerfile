@@ -1,10 +1,12 @@
 FROM node:20 AS base
 
-RUN mkdir app
+FROM base AS dependencies
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json .
+COPY package.json ./
+
+COPY .env ./
 
 RUN npm install
 
@@ -15,21 +17,20 @@ WORKDIR /usr/src/app
 COPY . .
 COPY --from=dependencies /usr/src/app/node_modules ./node_modules
 
-RUN npm build
+RUN npm run build
 RUN npm prune --prod
 
-FROM node:20-alpine3.19 AS deploy
+FROM base AS deploy
 
 WORKDIR /usr/src/app
-
-RUN npm i -g npm prisma
 
 COPY --from=build /usr/src/app/dist ./dist
 COPY --from=build /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/package.json ./package.json
 COPY --from=build /usr/src/app/prisma ./prisma
+COPY .env ./
 
-RUN npm prisma generate
+RUN npx prisma generate
 
 EXPOSE 	3333
 
